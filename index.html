@@ -37,14 +37,16 @@ const {useState,useEffect,useMemo}=React;
 
 /* ======= HELPERS ======= */
 const gid=()=>'_'+Math.random().toString(36).substr(2,9);
-const KEY='eid-checklist-ia-2026';
+const KEY='eid-adha-checklist-ia-2026';
 const TODAY=(()=>{const d=new Date();d.setHours(0,0,0,0);return d})();
 
 function parseDL(s){
     if(!s)return null;
     const m=s.match(/(\d+)/);
     if(!m)return null;
-    return new Date(2026,2,parseInt(m[1]));
+    const day=parseInt(m[1]);
+    if(s.includes('مايو'))return new Date(2026,4,day);
+    return new Date(2026,5,day);
 }
 function daysLeft(dl){const d=parseDL(dl);if(!d)return null;return Math.ceil((d-TODAY)/864e5)}
 function dlStatus(dl){
@@ -70,7 +72,7 @@ const TC={
 /* ======= INITIAL DATA ======= */
 function makeData(){return[
 {id:'fayez',name:'فايز',tasks:[
-    {id:gid(),phase:'الإشراف على التوزيعات',phaseDate:'قبل 25 مارس',priority:'high',required:'توزيع 400 هدية للموظفين + 20 هدية VIP على جميع المواقع',notes:'',deadline:'24 مارس',subtasks:[
+    {id:gid(),phase:'الإشراف على التوزيعات',phaseDate:'قبل 2 يونيو',priority:'high',required:'توزيع 400 هدية للموظفين + 20 هدية VIP على جميع المواقع',notes:'',deadline:'1 يونيو',subtasks:[
         {id:gid(),text:'توزيع 110 هدية على مراكز الاتصال',done:false},
         {id:gid(),text:'توزيع 100 هدية في موقع الأمانة',done:false},
         {id:gid(),text:'توزيع 12 هدية في فرع الدمام',done:false},
@@ -79,44 +81,44 @@ function makeData(){return[
         {id:gid(),text:'توزيع 19 هدية VIP في مقر الهيئة',done:false},
         {id:gid(),text:'توزيع 1 هدية VIP في الأمانة',done:false}
     ]},
-    {id:gid(),phase:'إصدار تصاريح دخول السيارات',phaseDate:'قبل 23 مارس',priority:'high',required:'تصاريح سيارات الضيافة والهدايا والخشب',notes:'',deadline:'22 مارس',subtasks:[
+    {id:gid(),phase:'إصدار تصاريح دخول السيارات',phaseDate:'قبل 31 مايو',priority:'high',required:'تصاريح سيارات الضيافة والهدايا والخشب',notes:'',deadline:'30 مايو',subtasks:[
         {id:gid(),text:'التأكد من تعبئة النماذج المطلوبة',done:false},
         {id:gid(),text:'إرسال النماذج لإدارة البرج',done:false},
         {id:gid(),text:'أخذ الموافقة على التصريح',done:false},
         {id:gid(),text:'إرسال تصريح الدخول للموردين',done:false},
         {id:gid(),text:'التأكد من دخول الموردين بشكل سلس',done:false}
     ]},
-    {id:gid(),phase:'توصيل الضيافة للأمانة ومراكز الاتصال',phaseDate:'24 - 25 مارس',priority:'high',required:'توصيل الطاولات والأكل للمواقع',notes:'التنسيق مع أم جود وسعيد',deadline:'25 مارس',subtasks:[
+    {id:gid(),phase:'توصيل الضيافة للأمانة ومراكز الاتصال',phaseDate:'1 - 2 يونيو',priority:'high',required:'توصيل الطاولات والأكل للمواقع',notes:'التنسيق مع أم جود وسعيد',deadline:'2 يونيو',subtasks:[
         {id:gid(),text:'التأكد من أم جود وسعيد من توصيل الطاولات قبل الفعالية بيوم',done:false},
         {id:gid(),text:'يوم الفعالية: التأكد من وضع الأكل وإرسال صورة من الموقع',done:false}
     ]},
-    {id:gid(),phase:'الإشراف على المنظمين',phaseDate:'25 مارس',priority:'medium',required:'ضمان وصول وتوزيع المنظمين',notes:'',deadline:'25 مارس',subtasks:[
+    {id:gid(),phase:'الإشراف على المنظمين',phaseDate:'2 يونيو',priority:'medium',required:'ضمان وصول وتوزيع المنظمين',notes:'',deadline:'2 يونيو',subtasks:[
         {id:gid(),text:'التأكد من وصول المنظمين قبل الفعالية بساعتين',done:false},
         {id:gid(),text:'توزيع المنظمين على المواقع بطريقة مناسبة',done:false}
     ]},
-    {id:gid(),phase:'التأكد من مكائن الطبخ',phaseDate:'قبل 23 مارس',priority:'high',required:'موافقة البرج على استخدام مكائن الطبخ',notes:'',deadline:'22 مارس',subtasks:[
+    {id:gid(),phase:'التأكد من مكائن الطبخ',phaseDate:'قبل 31 مايو',priority:'high',required:'موافقة البرج على استخدام مكائن الطبخ',notes:'',deadline:'30 مايو',subtasks:[
         {id:gid(),text:'التأكد من البرج أن مكائن الطبخ بالإمكان استخدامها',done:false}
     ]},
-    {id:gid(),phase:'التأكد من استخدام مطبخ البرج',phaseDate:'قبل 23 مارس',priority:'medium',required:'موافقة البرج على استخدام المطبخ',notes:'',deadline:'22 مارس',subtasks:[
+    {id:gid(),phase:'التأكد من استخدام مطبخ البرج',phaseDate:'قبل 31 مايو',priority:'medium',required:'موافقة البرج على استخدام المطبخ',notes:'',deadline:'30 مايو',subtasks:[
         {id:gid(),text:'التأكد من إمكانية استخدام مطبخ البرج',done:false}
     ]}
 ]},
 {id:'abdulaziz',name:'عبدالعزيز',tasks:[
-    {id:gid(),phase:'الإشراف على فعالية Crystal Maze',phaseDate:'22 - 25 مارس',priority:'high',required:'تجهيز وتشغيل فعالية Crystal Maze بالكامل',notes:'تجربة الغرفة قبل الفعالية بـ 3 أيام',deadline:'25 مارس',subtasks:[
+    {id:gid(),phase:'الإشراف على فعالية Crystal Maze',phaseDate:'30 مايو - 2 يونيو',priority:'high',required:'تجهيز وتشغيل فعالية Crystal Maze بالكامل',notes:'تجربة الغرفة قبل الفعالية بـ 3 أيام',deadline:'2 يونيو',subtasks:[
         {id:gid(),text:'التأكد من أن الغرفة كبيرة ومناسبة',done:false},
         {id:gid(),text:'طباعة هوية الفعالية على الغرفة',done:false},
         {id:gid(),text:'تصميم أوراق النقود بهوية الفعالية',done:false},
         {id:gid(),text:'وضع خطة لآلية الربح والفوز',done:false},
         {id:gid(),text:'اقتراح أنواع الهدايا والتأكد من توفيرها من المورد',done:false},
-        {id:gid(),text:'تجربة الغرفة قبل الفعالية بـ 3 أيام (22 مارس)',done:false},
+        {id:gid(),text:'تجربة الغرفة قبل الفعالية بـ 3 أيام (30 مايو)',done:false},
         {id:gid(),text:'وضع منظمين وتعليمهم طريقة لعب الفعالية',done:false}
     ]},
-    {id:gid(),phase:'الإشراف على الضيافة والقهوجية',phaseDate:'24 - 25 مارس',priority:'high',required:'تجهيز الضيافة وتوفير القهوجية',notes:'التنسيق مع فايز ويحيى',deadline:'25 مارس',subtasks:[
+    {id:gid(),phase:'الإشراف على الضيافة والقهوجية',phaseDate:'1 - 2 يونيو',priority:'high',required:'تجهيز الضيافة وتوفير القهوجية',notes:'التنسيق مع فايز ويحيى',deadline:'2 يونيو',subtasks:[
         {id:gid(),text:'المتابعة مع فايز على وضع مكائن الطبخ',done:false},
         {id:gid(),text:'التأكد من تركيب طاولات كوفي بريك وكوكتيل قبل الحدث بيوم',done:false},
         {id:gid(),text:'التأكد من يحيى من توفير قهوجية سعوديين',done:false}
     ]},
-    {id:gid(),phase:'الإشراف على Sketch Art',phaseDate:'24 - 25 مارس',priority:'medium',required:'تجهيز وتشغيل ركن Sketch Art',notes:'',deadline:'25 مارس',subtasks:[
+    {id:gid(),phase:'الإشراف على Sketch Art',phaseDate:'1 - 2 يونيو',priority:'medium',required:'تجهيز وتشغيل ركن Sketch Art',notes:'',deadline:'2 يونيو',subtasks:[
         {id:gid(),text:'التأكد من أن الشاشة تعمل بحسب الوصف',done:false},
         {id:gid(),text:'التأكد من تصميم فريق الشاشة بهوية العيد',done:false},
         {id:gid(),text:'التأكد من أن الطباعة فورية',done:false},
@@ -125,23 +127,23 @@ function makeData(){return[
         {id:gid(),text:'توفير منظم يشرف عليها ويعرف استخدامها',done:false},
         {id:gid(),text:'توفير مشرف صيانة للاحتياط',done:false}
     ]},
-    {id:gid(),phase:'الإشراف على الخدمات اللوجستية',phaseDate:'23 - 24 مارس',priority:'high',required:'تصميم وتركيب جميع العناصر اللوجستية',notes:'',deadline:'24 مارس',subtasks:[
+    {id:gid(),phase:'الإشراف على الخدمات اللوجستية',phaseDate:'31 مايو - 1 يونيو',priority:'high',required:'تصميم وتركيب جميع العناصر اللوجستية',notes:'',deadline:'1 يونيو',subtasks:[
         {id:gid(),text:'التأكد من تصميم وتركيب البوابة الرئيسية',done:false},
         {id:gid(),text:'التأكد من تصميم وتركيب كاونتر الاستقبال',done:false},
         {id:gid(),text:'التأكد من تصميم وتركيب المظاهر الجمالية',done:false},
         {id:gid(),text:'التأكد من تصميم وتوزيع اللوحات الإرشادية',done:false}
     ]},
-    {id:gid(),phase:'المتابعة مع المحتوى وفريق التسويق',phaseDate:'16 - 25 مارس',priority:'high',required:'نشر إعلانات الفعالية عبر جميع القنوات',notes:'التنسيق مع أبو فاطمة وأبو إسلام وعبدالله اليابس',deadline:'16 مارس',subtasks:[
+    {id:gid(),phase:'المتابعة مع المحتوى وفريق التسويق',phaseDate:'24 مايو - 2 يونيو',priority:'high',required:'نشر إعلانات الفعالية عبر جميع القنوات',notes:'التنسيق مع أبو فاطمة وأبو إسلام وعبدالله اليابس',deadline:'24 مايو',subtasks:[
         {id:gid(),text:'المتابعة مع أبو فاطمة لتوجيه كتّاب المحتوى لكتابة الإعلانات',done:false},
         {id:gid(),text:'اعتماد الإعلانات من قبل أبو إسلام',done:false},
         {id:gid(),text:'إرسالها لعبدالله اليابس لمخاطبة فريق التسويق للنشر والتعميم',done:false},
-        {id:gid(),text:'الإعلان الرئيسي يوم 16 مارس (إيميل / سناب شات / واتساب)',done:false},
-        {id:gid(),text:'الإعلان التذكيري الأول يوم 18 مارس (سناب شات / واتساب)',done:false},
-        {id:gid(),text:'الإعلان وقت الفعالية يوم 25 مارس (إيميل / سناب شات / واتساب)',done:false}
+        {id:gid(),text:'الإعلان الرئيسي يوم 24 مايو (إيميل / سناب شات / واتساب)',done:false},
+        {id:gid(),text:'الإعلان التذكيري الأول يوم 26 مايو (سناب شات / واتساب)',done:false},
+        {id:gid(),text:'الإعلان وقت الفعالية يوم 2 يونيو (إيميل / سناب شات / واتساب)',done:false}
     ]}
 ]},
 {id:'shared',name:'مهام مشتركة',tasks:[
-    {id:gid(),phase:'الإشراف على التركيب — رحلة الزائر',phaseDate:'24 - 25 مارس',priority:'high',required:'مراجعة شاملة للتركيب خطوة بخطوة كرحلة زائر من الدخول حتى الخروج',notes:'مهمة مشتركة بين جميع أعضاء الفريق بما فيهم المشرف',deadline:'24 مارس',subtasks:[
+    {id:gid(),phase:'الإشراف على التركيب — رحلة الزائر',phaseDate:'1 - 2 يونيو',priority:'high',required:'مراجعة شاملة للتركيب خطوة بخطوة كرحلة زائر من الدخول حتى الخروج',notes:'مهمة مشتركة بين جميع أعضاء الفريق بما فيهم المشرف',deadline:'1 يونيو',subtasks:[
         {id:gid(),text:'الإشراف على التركيب خطوة بخطوة وشرحها كرحلة زائر من الدخول وحتى الخروج',done:false}
     ]}
 ]}
@@ -219,7 +221,8 @@ function App(){
     const rmS=(sId)=>setEditing(e=>({...e,task:{...e.task,subtasks:e.task.subtasks.filter(s=>s.id!==sId)}}));
 
     const c=TC[tab]||TC.fayez;
-    const todayStr=TODAY.getDate()+' 2 June '+TODAY.getFullYear();
+    const monthNames=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+    const todayStr=TODAY.getDate()+' '+monthNames[TODAY.getMonth()]+' '+TODAY.getFullYear();
 
     return(
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
@@ -231,9 +234,9 @@ function App(){
                     <div>
                         <div className="flex items-center gap-2 mb-1">
                             <i className="fas fa-moon text-yellow-300 text-lg"></i>
-                            <h1 className="text-lg font-bold">احتفال عيد الاضحى 🎉</h1>
+                            <h1 className="text-lg font-bold">احتفال عيد الأضحى 🎉</h1>
                         </div>
-                        <p className="text-emerald-300 text-xs">هيئة التأمين • الثلاثاء 2 June • اليوم: {todayStr}</p>
+                        <p className="text-emerald-300 text-xs">هيئة التأمين • الثلاثاء 2 يونيو 2026 • اليوم: {todayStr}</p>
                     </div>
                     <div className="flex items-center gap-2">
                         <button onClick={()=>setShowAlerts(true)} className="relative p-2 rounded-lg bg-white/10 hover:bg-white/20 transition">
@@ -302,22 +305,18 @@ function App(){
                                         <h3 className="font-bold text-gray-800 text-sm leading-relaxed">{task.phase}</h3>
                                     </div>
                                     <div className="flex flex-wrap items-center gap-2 mr-8">
-                                        {/* Priority */}
                                         <span className={"inline-flex items-center gap-1 text-xs font-medium px-2 py-1 rounded-full border "+pr.bg+' '+pr.color+' '+pr.border}>
                                             <span className={"w-1.5 h-1.5 rounded-full "+pr.dot}></span>{pr.label}
                                         </span>
-                                        {/* Deadline Status */}
                                         <span className={"inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full "+(done?'bg-green-100 text-green-700':ds.bg+' '+ds.color)+(ds.pulse&&!done?' pulse-u':'')}>
                                             {done?'✅ مكتملة':ds.icon+' '+ds.label}
                                         </span>
-                                        {/* Deadline Date */}
                                         <span className="inline-flex items-center gap-1 text-xs text-gray-400 px-2 py-1 rounded-full bg-gray-50">
                                             <i className="far fa-clock text-xs"></i> التسليم: {task.deadline}
                                         </span>
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-2 flex-shrink-0">
-                                    {/* Circle Progress */}
                                     <div className="relative w-10 h-10 flex items-center justify-center">
                                         <svg className="absolute inset-0 w-10 h-10" viewBox="0 0 36 36" style={{transform:'rotate(-90deg)'}}>
                                             <circle cx="18" cy="18" r="15.5" fill="none" stroke="#e5e7eb" strokeWidth="2"/>
@@ -330,7 +329,7 @@ function App(){
                             </div>
                         </div>
 
-                        {/* TASK BODY (expanded) */}
+                        {/* TASK BODY */}
                         {open&&(
                         <div className="px-4 pb-4 border-t border-gray-50 anim-fade">
                             <div className={"mt-3 p-3 rounded-lg text-xs leading-relaxed "+c.light}>
