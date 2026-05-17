@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>قائمة تحقق - احتفال عيد الفطر | هيئة التأمين</title>
+    <title>قائمة تحقق - احتفال عيد الاضحى | هيئة التأمين</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
@@ -219,7 +219,7 @@ function App(){
     const rmS=(sId)=>setEditing(e=>({...e,task:{...e.task,subtasks:e.task.subtasks.filter(s=>s.id!==sId)}}));
 
     const c=TC[tab]||TC.fayez;
-    const todayStr=TODAY.getDate()+' مارس '+TODAY.getFullYear();
+    const todayStr=TODAY.getDate()+' June '+TODAY.getFullYear();
 
     return(
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
@@ -231,9 +231,9 @@ function App(){
                     <div>
                         <div className="flex items-center gap-2 mb-1">
                             <i className="fas fa-moon text-yellow-300 text-lg"></i>
-                            <h1 className="text-lg font-bold">احتفال عيد الفطر 🎉</h1>
+                            <h1 className="text-lg font-bold">احتفال عيد الاضحى 🎉</h1>
                         </div>
-                        <p className="text-emerald-300 text-xs">هيئة التأمين • الثلاثاء 25 مارس • اليوم: {todayStr}</p>
+                        <p className="text-emerald-300 text-xs">هيئة التأمين • الثلاثاء 2 يونيو • اليوم: {todayStr}</p>
                     </div>
                     <div className="flex items-center gap-2">
                         <button onClick={()=>setShowAlerts(true)} className="relative p-2 rounded-lg bg-white/10 hover:bg-white/20 transition">
