@@ -219,7 +219,7 @@ function App(){
     const rmS=(sId)=>setEditing(e=>({...e,task:{...e.task,subtasks:e.task.subtasks.filter(s=>s.id!==sId)}}));
 
     const c=TC[tab]||TC.fayez;
-    const todayStr=TODAY.getDate()+' June '+TODAY.getFullYear();
+    const todayStr=TODAY.getDate()+' 2 June '+TODAY.getFullYear();
 
     return(
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
@@ -233,7 +233,7 @@ function App(){
                             <i className="fas fa-moon text-yellow-300 text-lg"></i>
                             <h1 className="text-lg font-bold">احتفال عيد الاضحى 🎉</h1>
                         </div>
-                        <p className="text-emerald-300 text-xs">هيئة التأمين • الثلاثاء 2 يونيو • اليوم: {todayStr}</p>
+                        <p className="text-emerald-300 text-xs">هيئة التأمين • الثلاثاء 2 June • اليوم: {todayStr}</p>
                     </div>
                     <div className="flex items-center gap-2">
                         <button onClick={()=>setShowAlerts(true)} className="relative p-2 rounded-lg bg-white/10 hover:bg-white/20 transition">
